@@ -15,6 +15,7 @@ from recbole.utils import InputType, ModelType
 
 from data.dataloader.abstract_dataloader import AbstractDataLoader, NegTagSampleDataLoader
 
+
 class TrainDataLoader(NegTagSampleDataLoader):
     """:class:`TrainDataLoader` is a dataloader for training.
     It can generate negative interaction when :attr:`training_neg_sample_num` is not zero.

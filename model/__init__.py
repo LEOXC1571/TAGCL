@@ -11,10 +11,9 @@ from .lagcf import LAGCF
 from .tgcn import TGCN
 from .simgcl import SimGCL
 from .fairtag import FTAGCL
-# from .tsgl import TSGL
 from recbole.model.general_recommender import Pop
 
-recbole_models = { # for temp using recbole inner model
+recbole_models = {
     'BPR',
     'Pop'
 }

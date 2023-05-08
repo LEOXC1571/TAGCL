@@ -6,8 +6,6 @@
 
 import pandas as pd
 import os
-import codecs
-import gzip
 import sys
 import csv
 
@@ -16,10 +14,12 @@ csv.field_size_limit(sys.maxsize)
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 RAW_DATASETS = 'dataset/bibsonomy_bm/tas'
 
+
 def parse(path):
   g = open(path, 'rb')
   for l in g:
     yield eval(l)
+
 
 def getDF(path):
   i = 0
@@ -28,6 +28,7 @@ def getDF(path):
     df[i] = d
     i += 1
   return pd.DataFrame.from_dict(df, orient='index')
+
 
 def get_helpful(x):
   x = x[1: -1]
@@ -40,5 +41,4 @@ def get_helpful(x):
 
 
 data = pd.read_csv('../dataset/bibsonomy_bm/tas', delimiter='\t', header=None, engine='python', quoting=csv.QUOTE_NONE)
-
 print('done')

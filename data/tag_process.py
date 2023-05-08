@@ -5,24 +5,16 @@
 # @Author    :Miracleyin
 # @Mail      :miracleyin@live.com
 
-import bz2
 import csv
-import json
-import operator
 import os
-import re
 import time
-import datetime as dt
-
-import numpy as np
 import pandas as pd
-from tqdm import tqdm
-from data.base_dataset import BaseDataset
 from sklearn.preprocessing import LabelEncoder
+
+from data.base_dataset import BaseDataset
 
 
 class HETRECProcess(BaseDataset):
-
     def __init__(self, input_path, output_path, dataset_name='movielens'):
         super(HETRECProcess, self).__init__(input_path, output_path)
         _least_k = {"delicious": 15, "lastfm": 5, "movielens": 5, "bibsonomy_bm": 30, "bibsonomy_bt": 30}
@@ -38,7 +30,6 @@ class HETRECProcess(BaseDataset):
 
         self.sep = "\t"
 
-        # output file
         self.output_inter_file, self.output_assign_file = self._get_output_files()
 
         if self.dataset_name == 'bibsonomy_bm' or self.dataset_name == 'bibsonomy_bt':
@@ -64,15 +55,9 @@ class HETRECProcess(BaseDataset):
         return output_inter_file, output_assign_file
 
     def load_inter_data(self):
-        # origin_data = pd.read_csv(self.inter_file, delimiter=self.sep, engine='python')
-        # origin_data = origin_data.iloc[:, :3]  # 取出 user_id item_id tag_id
-        # tag_data = origin_data['tagID'].value_counts()
-        # del_tag = list(tag_data[origin_data['tagID']] >= self._least_k)
-        # origin_data = origin_data[del_tag]
-        # origin_data.reset_index(drop=True, inplace=True)
-        # origin_data = origin_data.iloc[:, [0, 1]]
         if self.dataset_name == 'bibsonomy_bm' or self.dataset_name == 'bibsonomy_bt':
-            origin_data = pd.read_csv(self.inter_file, delimiter='\t', header=None, engine='python', quoting=csv.QUOTE_NONE)
+            origin_data = pd.read_csv(self.inter_file, delimiter='\t', header=None,
+                                      engine='python', quoting=csv.QUOTE_NONE)
             origin_data.columns = ['user_id', 'tag_id', 'item_id', 'content_type', 'date']
             if self.dataset_name == 'bibsonomy_bm':
                 origin_data = origin_data[origin_data['content_type'] == 1]
@@ -80,7 +65,8 @@ class HETRECProcess(BaseDataset):
                 origin_data = origin_data[origin_data['content_type'] == 2]
             origin_data['tag_id'] = LabelEncoder().fit_transform(origin_data['tag_id'])
             # origin_data['date'] = pd.to_datetime(origin_data['date'], format='%Y/%m/%d')
-            origin_data['timestamp'] = origin_data['date'].apply(lambda x: time.mktime(time.strptime(x, '%Y-%m-%d %H:%M:%S')))
+            origin_data['timestamp'] = origin_data['date'].apply(lambda x: time.mktime(
+                time.strptime(x, '%Y-%m-%d %H:%M:%S')))
             origin_data.drop(['content_type', 'date'], axis=1, inplace=True)
             # origin_data = origin_data.iloc[:, :3]  # 取出 user_id item_id tag_id
             tag_data = origin_data['tag_id'].value_counts()
@@ -120,4 +106,3 @@ if __name__ == '__main__':
     output_path = f'../dataset/{data}'
     l = HETRECProcess(input_path, output_path, data)
     l.convert_inter()
-    # l.convert_assign()

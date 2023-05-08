@@ -7,7 +7,6 @@
 
 import os
 import pandas as pd
-
 from tqdm import tqdm
 
 
@@ -59,7 +58,6 @@ class BaseDataset(object):
             self.convert(input_inter_data, self.inter_fields, self.output_inter_file)
         except NotImplementedError:
             print('This dataset can\'t be converted to inter file\n')
-
 
     def convert_item(self):
         try:

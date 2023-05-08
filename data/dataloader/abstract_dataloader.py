@@ -7,11 +7,11 @@
 import math
 import copy
 from logging import getLogger
-
 import torch
 
 from recbole.data.interaction import Interaction
 from recbole.utils import InputType, FeatureType, FeatureSource
+
 
 class AbstractDataLoader:
     """:class:`AbstractDataLoader` is an abstract object which would return a batch of data which is loaded by

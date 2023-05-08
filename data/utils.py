@@ -4,18 +4,17 @@
 # @Author: LEO XU
 # @Email: leoxc1571@163.com
 
-import copy
 import importlib
 import os
 import pickle
 
 from recbole.data.dataloader import *
-# from recbole.sampler import KGSampler, Sampler, RepeatableSampler
-from recbole.utils import ModelType, ensure_dir, get_local_time, set_color
+from recbole.utils import ModelType, ensure_dir, set_color
 from recbole.utils.argument_list import dataset_arguments
 
 from data.dataloader import general_tag_dataloader
 from sampler.sampler import KGSampler, Sampler, RepeatableSampler
+
 
 def create_dataset(config):
     """Create dataset according to :attr:`config['model']` and :attr:`config['MODEL_TYPE']`.

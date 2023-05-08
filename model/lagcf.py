@@ -12,7 +12,6 @@ from model.layers import TransRTLoss
 
 class LAGCF(GeneralRecommender):
     input_type = InputType.PAIRWISE
-
     def __init__(self, config, dataset):
         # load dataset info
         self.TAG_ID = config['TAG_ID_FIELD']
@@ -144,15 +143,12 @@ class LAGCF(GeneralRecommender):
         loss = mf_loss + self.reg_weight * reg_loss + self.ut_weight * trans_loss_u + self.it_weight * trans_loss_i
         return loss
 
-
     def _get_kg_embedding(self, user, tag, pos_i, neg_i):
         user_e = self.user_embedding(user)
         tag_e = self.tag_embedding(tag)
         pos_e = self.item_embedding(pos_i)
         neg_e = self.item_embedding(neg_i)
-
         return user_e, tag_e, pos_e, neg_e
-
 
     def predict(self, interaction):
         user = interaction[self.USER_ID]
