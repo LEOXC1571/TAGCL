@@ -1,0 +1,4 @@
+embedding_size: 64
+lammda: 0.01
+beta: 0.01
+gamma: 0.1
