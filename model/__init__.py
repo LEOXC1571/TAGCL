@@ -5,25 +5,9 @@
 # @Author    :Miracleyin
 # @Mail      :miracleyin@live.com
 
-from .bprt import ExtendedBPR
-from .lightgcn import LightGCN
-from .lagcf import LAGCF
-from .tgcn import TGCN
-from .simgcl import SimGCL
 from .fairtag import FTAGCL
-from recbole.model.general_recommender import Pop
 
-recbole_models = {
-    'BPR',
-    'Pop'
-}
 
 model_name_map = {
-    'Pop': Pop,
-    'BPR-T': ExtendedBPR,
-    'LGCN': LightGCN,
-    'LFGCF': LAGCF,
-    'TGCN': TGCN,
-    'SimGCL': SimGCL,
     'TAGCL': FTAGCL
 }
