@@ -17,6 +17,7 @@
 @article{xu2023tagcl,
 title = {A fairness-aware graph contrastive learning recommender framework for social tagging systems},
 journal = {Information Sciences},
+volume = {640},
 pages = {119064},
 year = {2023},
 issn = {0020-0255},
